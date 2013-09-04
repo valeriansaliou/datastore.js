@@ -94,51 +94,39 @@ function hasDB() {
 }
 
 // Temporary: used to read a database entry
-function getDB(dbID, type, id) {
+function getDB(database, table, row) {
 	try {
-		return storageDB.getItem(dbID + '_' + type + '_' + id);
-	}
-	
-	catch(e) {
-		logThis('Error while getting a temporary database entry (' + dbID + ' -> ' + type + ' -> ' + id + '): ' + e, 1);
-	}
+		return storageDB.getItem(database + '_' + table + '_' + row);
+	} catch(e) {}
 
 	return null;
 }
 
 // Temporary: used to update a database entry
-function setDB(dbID, type, id, value) {
+function setDB(database, table, row, value) {
 	try {
-		storageDB.setItem(dbID + '_' + type + '_' + id, value);
+		storageDB.setItem(database + '_' + table + '_' + row, value);
 
 		return true;
-	}
-	
-	catch(e) {
-		logThis('Error while writing a temporary database entry (' + dbID + ' -> ' + type + ' -> ' + id + '): ' + e, 1);
-	}
+	} catch(e) {}
 
 	return false;
 }
 
 // Temporary: used to remove a database entry
-function removeDB(dbID, type, id) {
+function removeDB(database, table, row) {
 	try {
-		storageDB.removeItem(dbID + '_' + type + '_' + id);
+		storageDB.removeItem(database + '_' + table + '_' + row);
 		
 		return true;
-	}
-	
-	catch(e) {
-		logThis('Error while removing a temporary database entry (' + dbID + ' -> ' + type + ' -> ' + id + '): ' + e, 1);
-	}
+	} catch(e) {}
 
 	return false;
 }
 
 // Temporary: used to check a database entry exists
-function existDB(dbID, type, id) {
-	return getDB(type, id) != null;
+function existDB(database, table, row) {
+	return getDB(table, row) != null;
 }
 
 // Temporary: used to clear all the database
@@ -146,14 +134,8 @@ function resetDB() {
 	try {
 		storageDB.clear();
 		
-		logThis('Temporary database cleared.', 3);
-		
 		return true;
-	}
-	
-	catch(e) {
-		logThis('Error while clearing temporary database: ' + e, 1);
-		
+	} catch(e) {
 		return false;
 	}
 }
@@ -176,76 +158,61 @@ function hasPersistent() {
 		storagePersistent.removeItem('haspersistent_check');
 		
 		return true;
-	}
-	
-	// Not available?
-	catch(e) {
+	} catch(e) {
 		return false;
 	}
 }
 
 // Persistent: used to read a database entry
-function getPersistent(dbID, type, id) {
+function getPersistent(database, table, row) {
 	try {
-		return storagePersistent.getItem(dbID + '_' + type + '_' + id);
-	}
-	
-	catch(e) {
-		logThis('Error while getting a persistent database entry (' + dbID + ' -> ' + type + ' -> ' + id + '): ' + e, 1);
-		
+		return storagePersistent.getItem(database + '_' + table + '_' + row);
+	} catch(e) {
 		return null;
 	}
 }
 
 // Persistent: used to update a database entry
-function setPersistent(dbID, type, id, value) {
+function setPersistent(database, table, row, value) {
 	try {
-		storagePersistent.setItem(dbID + '_' + type + '_' + id, value);
+		storagePersistent.setItem(database + '_' + table + '_' + row, value);
 		
 		return true;
 	}
 	
 	// Database might be full
 	catch(e) {
-		logThis('Retrying: could not write a persistent database entry (' + dbID + ' -> ' + type + ' -> ' + id + '): ' + e, 2);
-		
-		// Flush it!
-		flushPersistent();
+		// Reset it!
+		resetPersistent();
 		
 		// Set the item again
 		try {
-			storagePersistent.setItem(dbID + ' -> ' + type + '_' + id, value);
+			storagePersistent.setItem(database + ' -> ' + table + '_' + row, value);
 			
 			return true;
 		}
 		
 		// New error!
-		catch(e) {
-			logThis('Aborted: error while writing a persistent database entry (' + dbID + ' -> ' + type + ' -> ' + id + '): ' + e, 1);
-		}
+		catch(e) {}
 	}
 
 	return false;
 }
 
 // Persistent: used to remove a database entry
-function removePersistent(dbID, type, id) {
+function removePersistent(database, table, row) {
 	try {
-		storagePersistent.removeItem(dbID + '_' + type + '_' + id);
+		storagePersistent.removeItem(database + '_' + table + '_' + row);
 
 		return true;
-	}
-	
-	catch(e) {
-		logThis('Error while removing a persistent database entry (' + dbID + ' -> ' + type + ' -> ' + id + '): ' + e, 1);
-	}
+	} catch(e) {}
 
 	return false;
 }
 
 // Persistent: used to check a database entry exists
-function existPersistent(dbID, type, id) {
-	return getPersistent(dbID, type, id) != null;
+function existPersistent(database, table, row) {
+	return getPersistent(database, table, row) != null;
 }
 
 // Persistent: used to clear all the database
@@ -253,39 +220,8 @@ function resetPersistent() {
 	try {
 		storagePersistent.clear();
 
-		logThis('Persistent database cleared.', 3);
-		
 		return true;
-	}
-	
-	catch(e) {
-		logThis('Error while clearing persistent database: ' + e, 1);
-	}
+	} catch(e) {}
 
 	return false;
-}
-
-// Persistent: used to flush the database
-function flushPersistent() {
-	try {
-		// Get the stored session entry
-		var session = getPersistent('global', 'session', 1);
-		
-		// Reset the persistent database
-		resetPersistent();
-		
-		// Restaure the stored session entry
-		if(session)
-			setPersistent('global', 'session', 1, session);
-		
-		logThis('Persistent database flushed.', 3);
-		
-		return true;
-	}
-	
-	catch(e) {
-		logThis('Error while flushing persistent database: ' + e, 1);
-	}
-
-	return false;
-}
+}-
