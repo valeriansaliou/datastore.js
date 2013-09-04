@@ -1,3 +1,14 @@
+/*
+ *  Datastore.js
+ *
+ *  An interface to native/emulated database storage methods
+ *  Avoids issues when browser does not have native database storage
+ *
+ *  @license OS
+ *  @author Valérian Saliou <valerian@valeriansaliou.name>
+ *  @url https://github.com/valeriansaliou/datastore.js
+ */
+
 // Common: storage adapter
 function storageAdapter(storage_native, storage_emulated) {
 	var legacy = !storage_native;
