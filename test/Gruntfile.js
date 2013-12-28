@@ -1,5 +1,5 @@
 /*
- * Console.js
+ * DataStore.js
  * Test tasks (uses GruntJS)
  *
  * Copyright 2013, FrenchTouch Web Agency
@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 
     // Task: JSHint
     jshint: {
-      files: ['../console.js']
+      files: ['../datastore.js']
     }
   });
 
