@@ -354,7 +354,7 @@ var DataStore = (function () {
                 Console.warn('Retrying: could not write a persistent database entry (' + dbID + ' -> ' + type + ' -> ' + id + ')', e);
                 
                 // Flush it!
-                self.flushPersistent();
+                self.resetPersistent();
                 
                 // Set the item again
                 try {
@@ -449,43 +449,6 @@ var DataStore = (function () {
             return false;
         } catch(e) {
             Console.error('DataStore.resetPersistent', e);
-        }
-
-    };
-
-
-    /**
-     * Persistent: used to flush the database
-     * @public
-     * @param {type} name
-     * @return {boolean}
-     */
-    self.flushPersistent = function() {
-
-        try {
-            try {
-                // Get the stored session entry
-                var session = self.getPersistent('global', 'session', 1);
-                
-                // Reset the persistent database
-                self.resetPersistent();
-                
-                // Restaure the stored session entry
-                if(session)
-                    self.setPersistent('global', 'session', 1, session);
-                
-                Console.info('Persistent database flushed.');
-                
-                return true;
-            }
-            
-            catch(e) {
-                Console.error('Error while flushing persistent database', e);
-            }
-
-            return false;
-        } catch(e) {
-            Console.error('DataStore.flushPersistent', e);
         }
 
     };
