@@ -6,7 +6,7 @@ A complete Web storage wrapper (sessionStorage/localStorage). Provides a fallbac
 This wrapper has been extracted from [Jappix](https://github.com/jappix/jappix), the project for which it's been written.
 
 
-[![build status](https://ci.frenchtouch.pro/projects/11/status.png?ref=master)](https://ci.frenchtouch.pro/projects/11?ref=master)
+[![build status](https://ci.hakuma.holdings/projects/11/status.png?ref=master)](https://ci.hakuma.holdings/projects/11?ref=master)
 
 
 ## How To Use?
