@@ -1,6 +1,6 @@
 /*
  * DataStore.js
- * Test tasks (uses GruntJS)
+ * Tasks (uses GruntJS)
  *
  * Copyright 2013, FrenchTouch Web Agency
  * Author: Valérian Saliou <valerian@valeriansaliou.name>
@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 
     // Task: JSHint
     jshint: {
-      files: ['../datastore.js']
+      files: ['datastore.js']
     }
   });
 
