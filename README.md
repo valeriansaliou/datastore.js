@@ -8,7 +8,7 @@ A complete Web storage wrapper (sessionStorage/localStorage). Provides a fallbac
 This wrapper has been extracted from [Jappix](https://github.com/jappix/jappix), the project for which it's been written.
 
 
-[![build status](https://ci.hakuma.holdings/projects/11/status.png?ref=master)](https://ci.hakuma.holdings/projects/11?ref=master)
+[![Build Status](https://travis-ci.org/valeriansaliou/datastore.js.svg?branch=master)](https://travis-ci.org/valeriansaliou/datastore.js)
 
 
 ## How To Use?
