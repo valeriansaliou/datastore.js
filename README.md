@@ -1,14 +1,11 @@
 DataStore.js
 ============
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/valeriansaliou/datastore.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/valeriansaliou/datastore.js.svg?branch=master)](https://travis-ci.org/valeriansaliou/datastore.js) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/valeriansaliou/datastore.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A complete Web storage wrapper (sessionStorage/localStorage). Provides a fallback when not supported.
 
 This wrapper has been extracted from [Jappix](https://github.com/jappix/jappix), the project for which it's been written.
-
-
-[![Build Status](https://travis-ci.org/valeriansaliou/datastore.js.svg?branch=master)](https://travis-ci.org/valeriansaliou/datastore.js)
 
 
 ## How To Use?
