@@ -5,8 +5,6 @@ DataStore.js
 
 A complete Web storage wrapper (sessionStorage/localStorage). Provides a fallback when not supported.
 
-This wrapper has been extracted from [Jappix](https://github.com/jappix/jappix), the project for which it's been written.
-
 
 ## How To Use?
 
